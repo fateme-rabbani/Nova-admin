@@ -7,6 +7,11 @@ export async function getProducts(): Promise<Product[]> {
   return response.data;
 }
 
+export async function getCategories(): Promise<string[]> {
+  const response = await axiosInstance.get<string[]>("/products/categories");
+  return response.data;
+}
+
 export async function createProduct(product: Omit<Product, "id">) {
   const response = await axiosInstance.post<{ id: number }>(
     "/products",

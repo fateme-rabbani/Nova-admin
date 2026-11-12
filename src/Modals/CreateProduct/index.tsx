@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { ImageUp } from "lucide-react";
 import Modal from "../../Shared/Modal";
@@ -8,7 +8,10 @@ import Button from "../../Shared/Button";
 import { dictionary } from "../../Dictionary";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { addProduct } from "../../Redux/products/productsSlice";
-import { createProduct } from "../../Utils/services/productService";
+import {
+  createProduct,
+  getCategories,
+} from "../../Utils/services/productService";
 import { productValidation } from "../../Validations/product";
 import {
   Form,
@@ -34,7 +37,17 @@ function CreateProduct({ onClose, onCreated }: CreateProductProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("");
 
-  const categories = [...new Set(products.map((item) => item.category))];
+  const [categories, setCategories] = useState(() => [
+    ...new Set(products.map((item) => item.category)),
+  ]);
+
+  useEffect(() => {
+    getCategories()
+      .then((items) => {
+        setCategories(items);
+      })
+      .catch(() => {});
+  }, []);
 
   const formik = useFormik({
     initialValues: {
