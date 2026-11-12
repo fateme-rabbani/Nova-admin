@@ -10,8 +10,10 @@ export interface User {
 }
 
 export interface CreateUserValues {
-  firstname: string;
-  lastname: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
   username: string;
   email: string;
   password: string;

@@ -16,6 +16,7 @@ interface InputProps {
   type?: "text" | "password" | "email" | "tel" | "url";
   value?: string;
   placeholder?: string;
+  autoComplete?: string;
   label?: string;
   error?: string;
   disabled?: boolean;
