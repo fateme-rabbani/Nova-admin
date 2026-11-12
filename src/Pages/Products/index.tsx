@@ -8,6 +8,7 @@ import Button from "../../Shared/Button";
 import SearchBox from "../../Shared/SearchBox";
 import Table from "../../Shared/Table";
 import Pagination from "../../Shared/Pagination";
+import Notification from "../../Shared/Notification";
 import {
   Container,
   Toolbar,
@@ -18,6 +19,7 @@ import {
   ActionButton,
   Price,
 } from "./styles";
+import CreateProduct from "../../Modals/CreateProduct";
 
 const pageSize = 5;
 
@@ -31,9 +33,20 @@ function Products() {
   const [page, setPage] = useState(1);
   const [hiddenIds, setHiddenIds] = useState<number[]>([]);
 
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
   useEffect(() => {
     fetchProducts(dispatch);
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!successMessage) return;
+
+    const timer = setTimeout(() => setSuccessMessage(""), 3000);
+
+    return () => clearTimeout(timer);
+  }, [successMessage]);
 
   const filteredProducts = items.filter((product) =>
     product.title.toLowerCase().includes(search.trim().toLowerCase()),
@@ -66,7 +79,15 @@ function Products() {
   return (
     <Container>
       <Toolbar>
-        <Button rightIcon={<Plus size={18} />}>{text.create}</Button>
+        <Button
+          rightIcon={<Plus size={18} />}
+          onClick={() => {
+            setSuccessMessage("");
+            setCreateModalOpen(true);
+          }}
+        >
+          {text.create}
+        </Button>
 
         <SearchWrapper>
           <SearchBox
@@ -80,6 +101,13 @@ function Products() {
           />
         </SearchWrapper>
       </Toolbar>
+
+      {successMessage && (
+        <Notification
+          message={successMessage}
+          onClose={() => setSuccessMessage("")}
+        />
+      )}
 
       <Table
         columns={columns}
@@ -151,6 +179,16 @@ function Products() {
           onPageChange={setPage}
           previousLabel={text.previous}
           nextLabel={text.next}
+        />
+      )}
+      {createModalOpen && (
+        <CreateProduct
+          onClose={() => setCreateModalOpen(false)}
+          onCreated={() => {
+            setSearch("");
+            setPage(1);
+            setSuccessMessage(text.created);
+          }}
         />
       )}
     </Container>
