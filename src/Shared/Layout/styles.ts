@@ -69,7 +69,7 @@ export const MenuLink = styled(NavLink)`
   }
 
   &.active {
-    background: ${({ theme }) => theme.colors.secondary500};
+    background: ${({ theme }) => theme.colors.info500};
     color: ${({ theme }) => theme.colors.primary800};
   }
 `;
