@@ -8,7 +8,14 @@ export async function fetchUsers(dispatch: AppDispatch) {
 
   try {
     const users = await getUsers();
-    dispatch(setUsers({ items: users, loading: false, error: null }));
+    const items = users.map((user) => ({
+      id: user.id,
+      name: { firstname: user.name.firstname, lastname: user.name.lastname },
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+    }));
+    dispatch(setUsers({ items, loading: false, error: null }));
   } catch (error) {
     dispatch(
       setUsers({ items: [], loading: false, error: getApiErrorKey(error) }),
