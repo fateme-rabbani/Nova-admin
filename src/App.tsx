@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import Layout from "./Shared/Layout";
 import { lightTheme, darkTheme } from "./Shared/Theme/theme";
 import { useAppSelector } from "./Redux/hooks";
+import AppRoutes from "./Routes";
 
 function App() {
   const { language, darkMode } = useAppSelector((state) => state.settings);
@@ -16,7 +17,9 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
-        <Layout>{null}</Layout>
+        <Layout>
+          <AppRoutes />
+        </Layout>
       </BrowserRouter>
     </ThemeProvider>
   );
