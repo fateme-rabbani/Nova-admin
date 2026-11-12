@@ -8,7 +8,7 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-export const StyledTable = styled.table`
+export const StyledTable = styled.table<{ $showState: boolean }>`
   width: 100%;
   border-collapse: collapse;
   color: ${({ theme }) => theme.colors.text};
@@ -17,6 +17,7 @@ export const StyledTable = styled.table`
   table-layout: fixed;
 
   thead {
+    height: 64px;
     background: ${({ theme }) =>
       theme.mode === "dark"
         ? theme.colors.primary800
@@ -50,6 +51,11 @@ export const StyledTable = styled.table`
     margin-inline: auto;
   }
 
+  tbody {
+    height: ${({ $showState }) => ($showState ? "360px" : "auto")};
+    background: ${({ theme }) => theme.colors.contentBackground};
+  }
+
   tbody tr:last-child td {
     border-bottom: 0;
   }
@@ -59,6 +65,7 @@ export const StyledTable = styled.table`
   }
 
   tbody tr:hover {
-    background: ${({ theme }) => theme.colors.background};
+    background: ${({ theme, $showState }) =>
+      $showState ? theme.colors.contentBackground : theme.colors.background};
   }
 `;
