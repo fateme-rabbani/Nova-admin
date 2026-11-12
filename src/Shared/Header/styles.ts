@@ -17,6 +17,23 @@ export const Actions = styled.div`
   gap: 16px;
 `;
 
+export const LogoutButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.negative500};
+  cursor: pointer;
+  direction: var(--content-direction);
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.background};
+  }
+`;
+
 export const Profile = styled.div`
   display: flex;
   align-items: center;

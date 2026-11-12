@@ -1,6 +1,7 @@
-import { Menu, Bell, UserRound } from "lucide-react";
+import { Menu, Bell, UserRound, LogOut } from "lucide-react";
 import { dictionary } from "../../Dictionary";
-import { useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { logoutUser } from "../../Redux/auth/authActions";
 import {
   Container,
   Actions,
@@ -8,16 +9,24 @@ import {
   ProfileText,
   Role,
   Avatar,
+  LogoutButton,
 } from "./styles";
 
 function Header() {
+  const dispatch = useAppDispatch();
   const language = useAppSelector((state) => state.settings.language);
+
   const text = dictionary[language];
+
   return (
     <Container>
       <Actions>
         <Menu size={20} />
         <Bell size={20} />
+        <LogoutButton type="button" onClick={() => logoutUser(dispatch)}>
+          <LogOut size={18} />
+          {text.auth.logout}
+        </LogoutButton>
       </Actions>
 
       <Profile>
