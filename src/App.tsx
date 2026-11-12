@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 import { ThemeProvider } from "styled-components";
-import Layout from "./Shared/Layout";
 import { lightTheme, darkTheme } from "./Shared/Theme/theme";
 import { useAppSelector } from "./Redux/hooks";
 import AppRoutes from "./Routes";
@@ -17,9 +16,7 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <BrowserRouter>
-        <Layout>
-          <AppRoutes />
-        </Layout>
+        <AppRoutes />
       </BrowserRouter>
     </ThemeProvider>
   );
