@@ -4,7 +4,11 @@ const palette = {
   primary800: "#172740",
   primary700: "#243957",
   primary600: "#395171",
-  primary100: "#d1d1df",
+  primary500: "#566d8c",
+  primary400: "#7b8fa9",
+  primary300: "#a2b1c7",
+  primary200: "#c6cedd",
+  primary100: "#e0e4ee",
   primary50: "#f0f0fa",
   primary25: "#fbfbfd",
 
@@ -25,6 +29,7 @@ const palette = {
   white: "#ffffff",
 };
 export const lightTheme = {
+  mode: "light" as const,
   colors: {
     ...palette,
     background: palette.primary50,
@@ -35,11 +40,12 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  mode: "dark" as const,
   colors: {
     ...palette,
     background: palette.primary950,
     contentBackground: palette.primary700,
     text: palette.primary25,
-    border: palette.primary700,
+    border: palette.primary600,
   },
 };
