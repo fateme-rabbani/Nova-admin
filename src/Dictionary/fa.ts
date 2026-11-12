@@ -1,4 +1,17 @@
 export const fa = {
+  auth: {
+    title: "ورود به پنل مدیریت",
+    username: "نام کاربری",
+    password: "رمز عبور",
+    submit: "ورود",
+    submitting: "در حال ورود…",
+    logout: "خروج",
+    required: "این فیلد الزامی است.",
+    invalidCredentials: "نام کاربری یا رمز عبور اشتباه است.",
+    networkError: "ارتباط با سرور برقرار نشد. دوباره تلاش کنید.",
+    timeout: "زمان انتظار تمام شد. دوباره تلاش کنید.",
+    error: "ورود انجام نشد. دوباره تلاش کنید.",
+  },
   users: {
     search: "جست‌وجوی کاربر",
     searchPlaceholder: "جست‌وجو در کاربران…",

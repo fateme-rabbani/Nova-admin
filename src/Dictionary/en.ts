@@ -1,4 +1,17 @@
 export const en = {
+  auth: {
+    title: "Sign in to the admin panel",
+    username: "Username",
+    password: "Password",
+    submit: "Sign in",
+    submitting: "Signing in…",
+    logout: "Sign out",
+    required: "This field is required.",
+    invalidCredentials: "Incorrect username or password.",
+    networkError: "Unable to connect to the server. Please try again.",
+    timeout: "The request timed out. Please try again.",
+    error: "Unable to sign in. Please try again.",
+  },
   users: {
     search: "Search users",
     searchPlaceholder: "Search users…",
