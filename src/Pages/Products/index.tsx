@@ -35,6 +35,7 @@ function Products() {
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [notificationId, setNotificationId] = useState(0);
 
   useEffect(() => {
     fetchProducts(dispatch);
@@ -46,7 +47,7 @@ function Products() {
     const timer = setTimeout(() => setSuccessMessage(""), 3000);
 
     return () => clearTimeout(timer);
-  }, [successMessage]);
+  }, [successMessage, notificationId]);
 
   const filteredProducts = items.filter((product) =>
     product.title.toLowerCase().includes(search.trim().toLowerCase()),
@@ -68,12 +69,24 @@ function Products() {
     { key: "actions", title: text.actions },
   ];
 
+  function showNotification(message: string) {
+    setSuccessMessage(message);
+    setNotificationId((current) => current + 1);
+  }
+
+  function handleDelete(id: number) {
+    dispatch(removeProduct(id));
+    showNotification(text.deleted);
+  }
+
   function toggleVisibility(id: number) {
+    const hidden = hiddenIds.includes(id);
     setHiddenIds((current) =>
       current.includes(id)
         ? current.filter((item) => item !== id)
         : [...current, id],
     );
+    showNotification(hidden ? text.shown : text.hiddenSuccess);
   }
 
   return (
@@ -153,7 +166,7 @@ function Products() {
                     type="button"
                     className="delete"
                     title={text.remove}
-                    onClick={() => dispatch(removeProduct(product.id))}
+                    onClick={() => handleDelete(product.id)}
                   >
                     <Trash2 size={17} />
                   </ActionButton>
@@ -187,7 +200,7 @@ function Products() {
           onCreated={() => {
             setSearch("");
             setPage(1);
-            setSuccessMessage(text.created);
+            showNotification(text.created);
           }}
         />
       )}
